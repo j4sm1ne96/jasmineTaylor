@@ -6,7 +6,7 @@
         <meta name="description" content="AJAX/PHP/CURL/JSON example">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Jasmine Taylor">
-
+        <link rel="stylesheet" href="libs/css/style.css">
     </head>
     <body>
         
@@ -14,7 +14,7 @@
                 <tr>
                     <th>API Name</th>
                     <th>Country Selection</th>
-                    <th>Submit</th>
+                    <th>&nbsp</th>
                 </tr>
                 <tr>
                     <td>1. Country Info - Capital</td>
@@ -46,28 +46,13 @@
                     </td>
                     <td><button id = "continentBtn">Submit</button></td>
                 </tr>
+                <tr colspan="3">
+                    <td id="txtCapital">&nbsp</td>
+                    <td id="txtPopulation">Results</td>
+                    <td id="txtContinent">&nbsp</td>
+                </tr>
             </table>
             <br>
-        <div id="results">
-            <table>
-                <tr colspan ="2">
-                    <th>Results</th>
-                </tr>
-                <tr>
-                    <td>1. Capital: </td>
-                    <td id="txtCapital"></td>
-                </tr>
-                <tr>
-                    <td>2. Population: </td>
-                    <td id="txtPopulation"></td>
-                </tr>
-                <tr>
-                    <td>3. Continent: </td>
-                    <td id="txtContinent"></td>
-                </tr>
-            </table>
-
-        </div>
         <div id ="preloader"></div>
 
         <script type="application/javascript" src="libs/js/jquery.js"></script>
