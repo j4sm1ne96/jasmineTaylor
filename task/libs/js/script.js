@@ -23,9 +23,6 @@ $(document).ready(function() {
         }); 
     });
 
-});
-
-$(document).ready(function() {
     $('#populationBtn').on("click", function() {
         $.ajax({
             url: "libs/php/populationInfo.php",
@@ -49,9 +46,7 @@ $(document).ready(function() {
             }
         }); 
     });
-});
 
-$(document).ready(function() {
     $('#continentBtn').on("click", function() {
         $.ajax({
             url: "libs/php/continentInfo.php",
