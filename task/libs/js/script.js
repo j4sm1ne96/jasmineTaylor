@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    
     $('#capitalBtn').on("click", function() {
         $.ajax({
             url: "libs/php/capitalInfo.php",
@@ -14,6 +15,10 @@ $(document).ready(function() {
                 if (result.status.name == "ok") {
 
                     $('#txtCapital').html(result['data'][0]['capital']);  
+                    $('#txtPopulation').hide();
+                    $('#txtContinent').hide();
+                    $('result').hide();
+                    $('#txtCapital').show();
                 }
             
             },
@@ -37,7 +42,11 @@ $(document).ready(function() {
 
                 if (result.status.name == "ok") {
 
-                    $('#txtCapital').html(result['data'][0]['population']);  
+                    $('#txtPopulation').html(result['data'][0]['population']);  
+                    $('#txtContinent').hide();
+                    $('result').hide();
+                    $('#txtCapital').hide();
+                    $('#txtPopulation').show();
                 }
             
             },
@@ -62,6 +71,10 @@ $(document).ready(function() {
                 if (result.status.name == "ok") {
 
                     $('#txtContinent').html(result['data'][0]['continent']);  
+                    $('result').hide();
+                    $('#txtCapital').hide();
+                    $('#txtPopulation').hide();
+                    $('#txtContinent').show();
                 }
             
             },
