@@ -1,4 +1,4 @@
-$(document).ready(function() {
+ $(document).ready(function() {
     
     $('#capitalBtn').on("click", function() {
         $.ajax({
@@ -17,7 +17,7 @@ $(document).ready(function() {
                     $('#txtCapital').html(result['data'][0]['capital']);  
                     $('#txtPopulation').hide();
                     $('#txtContinent').hide();
-                    $('result').hide();
+                    $('#result').hide();
                     $('#txtCapital').show();
                 }
             
@@ -44,7 +44,7 @@ $(document).ready(function() {
 
                     $('#txtPopulation').html(result['data'][0]['population']);  
                     $('#txtContinent').hide();
-                    $('result').hide();
+                    $('#result').hide();
                     $('#txtCapital').hide();
                     $('#txtPopulation').show();
                 }
@@ -71,7 +71,7 @@ $(document).ready(function() {
                 if (result.status.name == "ok") {
 
                     $('#txtContinent').html(result['data'][0]['continent']);  
-                    $('result').hide();
+                    $('#result').hide();
                     $('#txtCapital').hide();
                     $('#txtPopulation').hide();
                     $('#txtContinent').show();
