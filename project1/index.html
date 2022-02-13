@@ -1,1 +1,203 @@
-
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Gazetteer</title>
+        <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+        <!--Leaflet CSS-->
+        <link href="libs/css/leaflet.css" rel="stylesheet" crossorigin="anonymous">
+        <!--Bootstrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <!--My CSS-->
+        <link rel="stylesheet" href="libs/css/index.css">
+        <!--Extra Markers-->
+        <link href="libs/css/leaflet.extra-markers.min.css">
+        <!--Font Awesome JS-->
+        <script src="https://kit.fontawesome.com/835c55f77f.js" crossorigin="anonymous"></script>  
+        <!--Leaflet JS-->
+        <script src="http://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    </head>
+    <body>
+        <div id="preloader" style="display: none;"></div>
+        <div class="container">
+            <div id="nav">
+                <select id="chooseCountry">
+                    <option value="AF">Afghanistan</option>
+                    <option value="AL">Albania</option>
+                    <option value="DZ">Algeria</option>
+                    <option value="AU">Australia</option>
+                    <option value="AT">Austria</option>
+                    <option value="BS">Bahamas</option>
+                    <option value="BD">Bangladesh</option>
+                    <option value="BE">Belgium</option>
+                    <option value="BW">Botswana</option>
+                    <option value="BR">Brazil</option>
+                    <option value="BN">Brunei</option>
+                    <option value="KH">Cambodia</option>
+                    <option value="CM">Cameroon</option>
+                    <option value="CA">Canada</option>
+                    <option value="CL">Chile</option>
+                    <option value="CN">China</option>
+                    <option value="DK">Denmark</option>
+                    <option value="EC">Ecuador</option>
+                    <option value="EG">Egypt</option>
+                    <option value="ER">Eritrea</option>
+                    <option value="ET">Ethiopia</option>
+                    <option value="FJ">Fiji</option>
+                    <option value="FI">Finland</option>
+                    <option value="DE">Germany</option>
+                    <option value="GR">Greece</option>
+                    <option value="GL">Greenland</option>
+                    <option value="HT">Haiti</option>
+                    <option value="HU">Hungary</option>
+                    <option value="IN">India</option>
+                    <option value="ID">Indonesia</option>
+                    <option value="IR">Iran</option>
+                    <option value="IQ">Iraq</option>
+                    <option value="IE">Ireland</option>
+                    <option value="IL">Israel</option>
+                    <option value="IT">Italy</option>
+                    <option value="JM">Jamaica</option>
+                    <option value="JP">Japan</option>
+                    <option value="KE">Kenya</option>
+                    <option value="KR">Korea</option>
+                    <option value="LB">Lebanon</option>
+                    <option value="LR">Liberia</option>
+                    <option value="LY">Libya</option>
+                    <option value="LU">Luxembourg</option>
+                    <option value="MK">Macedonia</option>
+                    <option value="MG">Madagascar</option>
+                    <option value="MY">Malaysia</option>
+                    <option value="MX">Mexico</option>
+                    <option value="MM">Myanmar</option>
+                    <option value="NP">Nepal</option>
+                    <option value="NL">Netherlands</option>
+                    <option value="NC">New Caledonia</option>
+                    <option value="NZ">New Zealand</option>
+                    <option value="NE">Niger</option>
+                    <option value="NG">Nigeria</option>
+                    <option value="PK">Pakistan</option>
+                    <option value="PS">Palestine</option>
+                    <option value="PE">Peru</option>
+                    <option value="PH">Phillipines</option>
+                    <option value="PL">Poland</option>
+                    <option value="PT">Portugal</option>
+                    <option value="QA">Qatar</option>
+                    <option value="RO">Romania</option>
+                    <option value="RU">Russia</option>
+                    <option value="SA">Saudi Arabia</option>
+                    <option value="SN">Senegal</option>
+                    <option value="SL">Sierra Leone</option>
+                    <option value="SK">Slovakia</option>
+                    <option value="SI">Slovenia</option>
+                    <option value="SO">Somalia</option>
+                    <option value="ZA">South Africa</option>
+                    <option value="ES">Spain</option>
+                    <option value="LK">Sri Lanka</option>
+                    <option value="SD">Sudan</option>
+                    <option value="CH">Switzerland</option>
+                    <option value="TW">Taiwan</option>
+                    <option value="TZ">Tanzania</option>
+                    <option value="TH">Thailand</option>
+                    <option value="TT">Trinidad and Tobago</option>
+                    <option value="TN">Tunisia</option>
+                    <option value="TR">Turkey</option>
+                    <option value="UG">Uganda</option>
+                    <option value="UA">Ukraine</option>
+                    <option value="AE">United Arab Emirates</option>
+                    <option value="GB">United Kingdom</option>
+                    <option value="US">United States</option>
+                    <option value="VE">Venezuela</option>
+                    <option value="VN">Vietnam</option>
+                    <option value="YE">Yemen</option>
+                    <option value="ZM">Zambia</option>
+                    <option value="ZW">Zimbabwe</option>
+                </select>
+            </div>
+        </div>
+        <!--Map-->
+        <div id="map" class="leaflet-container" style="position: relative" tab-index="0">
+            <div class="leaflet-control-container">
+                <div class="leaflet-top leaflet-left">
+                    <div class="leaflet-control-zoom leaflet-bar leaflet-control">
+                        <a class="leaflet-control-zoom-in" href="#" title="Zoom in" role="button" aria-label="Zoom in">+</a>
+                        <a class="leaflet-control-zoom-out" href="#" title="Zoom out" role="button" aria-label="Zoom out">-</a>
+                    </div>
+                    <div class="leaflet-bar easy-button-container leaflet-control">
+                        <button class="easy-button-button leaflet-bar-part leaflet-interactive" id="countryBtn" type="button" data-target="#modalCountry" title="Country Information" data-toggle="modal" style="height:35px; width:37px; padding:5px;">
+                            <i class="fa-solid fa-earth-americas"></i>                        
+                        </button>
+                    </div>
+                    <div class="leaflet-bar easy-button-container leaflet-control">
+                        <button class="easy-button-button leaflet-bar-part leaflet-interactive" id="weatherBtn" type="button" data-target="#modalWeather" title="Weather" data-toggle="modal" style="height:35px; width:37px; padding:5px;">
+                            <i class="fa-solid fa-cloud-sun"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Country Modal-->
+        <div class="modal" id="modalCountry" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h3 class="modal-header" id="countryName">Country:</h3>
+                    <button type="button" class="btn-close btn-close-white" id="closeBtnCountry" data-bs-modal="dismiss" aria-label="close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container flex" id="countryInfoMain">
+                        <div class="row">
+                            <div class="col">Capital:</div>
+                            <div class="col" id="countryCapital"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">Population:</div>
+                            <div class="col" id="countryPopulation"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">Currency:</div>
+                            <div class="col" id="countryCurrency"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">Wikipedia:</div>
+                            <div class="col" id="countryWiki"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!--Weather Modal-->
+        <div class="modal" id="modalWeather" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h3 class="modal-header" id="staticBackdropLabel">Weather Forecast</h3>
+                    <button type="button" class="btn-close btn-close-white" id="closeBtnWeather" data-bs-modal="dismiss" aria-label="close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container flex" id="weatherMain">
+                        <div class="row">
+                            <div class="col">Current Temperature:</div>
+                            <div class="col" id="currentTemp"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">Minimum Temperature:</div>
+                            <div class="col" id="minTemp"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">Maximum Temperature:</div>
+                            <div class="col" id="maxTemp"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!--JS-->
+        <script src="libs/js/leaflet.js" crossorigin></script>
+        <script src="libs/js/leaflet-providers.js"></script>
+        <script src="libs/js/script.js"></script>
+        <script src="libs/js/leaflet.extra-markers.min.js"></script>
+    </body>
+</html>
