@@ -9,6 +9,26 @@ var Stamen_Terrain = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terr
 	ext: 'png'
 });
 
+// Select button
+
+$(document).ready(function() {
+    
+  $('#selectCountry').on("click", function() {
+      $.ajax({
+          url: "libs/php/getAllCountries.php",
+          type: 'POST',
+          dataType: 'json',
+          data: {
+              country: $('name').val(),
+          },
+          success: function(result) {
+
+              console.log(JSON.stringify(result));
+
+               }
+      });
+  });
+})
 
 //Country Modal
 //Getting Country Modal
