@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         type: 'POST',
         dataType: 'json',
         data: {
-            country: $('name').val(),
+            country: $countries.val(),
         },
         success: function(result) {
 
