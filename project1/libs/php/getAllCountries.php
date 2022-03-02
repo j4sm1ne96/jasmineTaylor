@@ -11,6 +11,7 @@ foreach($decoded_json['features'] as $country) {
     (object)['code' => $country['properties']['iso_a2'], 'name' => $country['properties']['name']]);
 }
 
+$executionStartTime = microtime(true);
 
 $output['status']['code'] = '200';
 $output['status']['name'] = 'ok';
@@ -23,5 +24,3 @@ header('Content-Type: application/json; charset=UTF-8');
 echo json_encode($output);
 
 ?>
-
-
