@@ -15,14 +15,12 @@ $(document).ready(function() {
         url: "libs/php/getAllCountries.php",
         type: 'GET',
         dataType: 'json',
-        data: {
-            country: $output.val(),
-        },
         success: function(result) {
-
-          $('#selectCountry')
-          .append($("<option></option>")
-          .country)
+          if(result.status.name === "ok") {
+            result.data.forEach(e => {
+              $('#selectCountry').append($(`<option value = "${e.code}">${e.name}</option>`))
+            });
+          }
         }
       })
   });
