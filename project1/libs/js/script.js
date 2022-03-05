@@ -24,6 +24,24 @@ $(document).ready(function() {
         }
       })
   });
+
+//Country Borders
+
+var border ;
+
+$('#btnRun').click(function() {
+     let name = $('#selCountry').val();
+    $.ajax({
+        url: "libs/php/getCountryBorder.php",
+        type: 'POST',
+        dataType: 'json',
+        success: function(result) {
+          const filterData = result.data.border.features.filter((a) => (a.properties.iso_a3 === name));
+          border = L.geoJSON(filterData[0]); 
+          map.fitBounds(border.getBounds());
+        }
+    });
+  });
         
 
 //Country Modal
@@ -69,4 +87,3 @@ window.onclick = function(event) {
       modalWeather.style.display = "none";
     }
   }
-  
