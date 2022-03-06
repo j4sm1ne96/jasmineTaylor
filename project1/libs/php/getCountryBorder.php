@@ -1,10 +1,8 @@
 <?php
 
-$json = file_get_contents('countryBorders.geo.json');
-
-$decoded_json = json_decode($json, true);
-
 $executionStartTime = microtime(true);
+
+$countryBorders = json_decode(file_get_contents('countryBorders.geo.json'), true);
 
 $output['status']['code'] = "200";
 $output['status']['name'] = "ok";
