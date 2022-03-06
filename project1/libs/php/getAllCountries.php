@@ -1,26 +1,31 @@
 <?php
 
-$json = file_get_contents('countryBorders.geo.json');
+    $executionStartTime = microtime(true);
+    $countryData = json_decode(file_get_contents("countryBorders.geo.json"), true);
 
-$decoded_json = json_decode($json, true);
+//empty country array
+    $country = [];
 
-$countries = [];
+    foreach ($countryData['features'] as $feature) {
+        $temp = null;
+        $temp['code'] = $feature["properties"]['iso_a2'];
+        $temp['name'] = $feature["properties"]['name'];
+        array_push($country, $temp);
+    }
 
-foreach($decoded_json['features'] as $country) {
-    array_push($countries,
-    (object)['code' => $country['properties']['iso_a2'], 'name' => $country['properties']['name']]);
-}
+//sort the countries by name
+    usort($country, function ($item1, $item2) {
+        return $item1['name'] <=> $item2['name'];
+    });
 
-$executionStartTime = microtime(true);
+    $output['status']['code'] = "200";
+    $output['status']['name'] = "ok";
+    $output['status']['description'] = "success";
+    $output['status']['executedIn'] = intval((microtime(true) - $executionStartTime) * 1000) . " ms";
+    $output['data'] = $country;
 
-$output['status']['code'] = '200';
-$output['status']['name'] = 'ok';
-$output['status']['description'] = 'success';
-$output['status']['returnedIn'] = intval((microtime(true) - $executionStartTime) * 1000) . " ms ";
-$output['data'] = $countries;
+    header('Content-Type: application/json; charset=UTF-8');
 
-header('Content-Type: application/json; charset=UTF-8');
-
-echo json_encode($output);
-
+    echo json_encode($output);
 ?>
+
