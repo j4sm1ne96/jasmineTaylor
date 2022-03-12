@@ -28,20 +28,54 @@ $(document).ready(function() {
 //Country Borders
 
 var border ;
+let visitedCountries = [];
 
-$('#btnRun').click(function() {
-     let name = $('#selCountry').val();
+$('#selCountry').on('change', function() {
+     let countryCode = $('#selCountry').val();
+     let countryOptionText = $('#selCountry').find('option:selected').text();
+
+     if(!visitedCountries.includes(countryOptionText)) {
+       visitedCountries.push(countryOptionText);
+     }
+
     $.ajax({
         url: "libs/php/getCountryBorder.php",
         type: 'POST',
         dataType: 'json',
         success: function(result) {
-          const filterData = result.data.border.features.filter((a) => (a.properties.iso_a3 === name));
-          border = L.geoJSON(filterData[0]); 
-          map.fitBounds(border.getBounds());
-        }
+          if (map.hasLayer(border)) {
+            map.removeLayer(border);
+          }
+          let countryArray = [];
+          let countryOptionTextArray = [];
+
+          for (let i = 0; i < result.data.border.features.length; i++) {
+            if (result.data.border.features[i].properties.iso_a3 === countryCode) {
+                countryArray.push(result.data.border.features[i]);
+            }
+        };
+        for (let i = 0; i < result.data.border.features.length; i++) {
+            if (result.data.border.features[i].properties.name === countryOptionText) {
+                countryOptionTextArray.push(result.data.border.features[i]);
+            }
+        };
+     
+        border = L.geoJSON(countryOptionTextArray[0], {
+                                                        color: 'lime',
+                                                        weight: 3,
+                                                        opacity: 0.75
+                                                        }).addTo(map);
+        let bounds = border.getBounds();
+            map.flyToBounds(bounds, {
+            padding: [35, 35], 
+            duration: 2,
+            });        
+        },
     });
+
   });
+
+
         
 
 //Country Modal
