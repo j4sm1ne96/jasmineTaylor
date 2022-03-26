@@ -30,7 +30,7 @@ $(document).ready(function() {
 var border ;
 let visitedCountries = [];
 
-$('#selCountry').on('change', function() {
+$('#selectCountry').on('change', function() {
      let countryCode = $('#selCountry').val();
      let countryOptionText = $('#selCountry').find('option:selected').text();
 
