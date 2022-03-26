@@ -6,8 +6,8 @@ $countryBorders = json_decode(file_get_contents('countryBorders.geo.json'), true
 
 $border = null;
 
-foreach ($countryBorders['features'] as $feature {
-  if($feature["properties"]["ISO_A3"] == $_REQUEST['countryCode']) {
+foreach ($countryBorders['features'] as $feature) {
+  if($feature["properties"]["iso_a2"] == $_REQUEST['countryCode']) {
     $border = $feature;
     break;
   }
