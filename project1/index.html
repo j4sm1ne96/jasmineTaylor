@@ -16,6 +16,8 @@
         <script src="https://kit.fontawesome.com/835c55f77f.js" crossorigin="anonymous"></script>  
         <!--Leaflet JS-->
         <script src="http://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <!--Author-->
+        <meta name="author" content="Jasmine Taylor">
         <!--JQuery-->
         <script src="libs/js/jquery-3.6.0.min.js" type="application/javascript"></script>
     </head>
@@ -24,7 +26,8 @@
         <div class="container">
             <div id="nav">
                 <select id="selectCountry">
-                   <option id = "selCountry" value="Select Country">Select Country</option>
+                   <option id = "selCountry" value="">Select Country</option>
+                   <button type="button" id="btnRun" data-bs-toggle="modal" data-bs-target="#modalCountry">
                 </select>
             </div>
         </div>
@@ -68,13 +71,25 @@
                             <div class="col" id="countryPopulation"></div>
                         </div>
                         <div class="row">
+                            <div class="col">Area in SqKm:</div>
+                            <div class="col" id="countryAreaInSqKm"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">Continent:</div>
+                            <div class="col" id="countryContinent"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">Languages:</div>
+                            <div class="col" id="countryLanguages"></div>
+                        </div>
+                        <!-- <div class="row">
                             <div class="col">Currency:</div>
                             <div class="col" id="countryCurrency"></div>
                         </div>
                         <div class="row">
                             <div class="col">Wikipedia:</div>
                             <div class="col" id="countryWiki"></div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -114,4 +129,3 @@
         <script src="libs/js/leaflet.extra-markers.min.js"></script>
     </body>
 </html>
-    
