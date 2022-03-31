@@ -101,10 +101,16 @@ $('#selectCountry').on('change', function() {
       
 
 //Country Modal
-//Getting Country Modal
-var modalCountry = document.getElementById("modalCountry");
-//Getting Country Modal Btn
-var countryBtn = document.getElementById("countryBtn");
+
+ var countrybtn = L.easyButton('<div class="backButton"><i class="fa fa-info"></i></div>', function(btn, map){
+    if ($('#selectCountry').val() === null){
+      $('#alert').modal('show');
+    }else{
+        $("#modalCountry").modal('show');
+    }
+  }).addTo(map);
+
+
 //Get Close Country Modal
 var closeBtn = document.getElementById("closeBtnCountry");
 //Open Modal
@@ -171,10 +177,15 @@ window.onclick = function(event) {
   
 
 //Weather Modal
-//Getting Weather Modal
-var modalWeather = document.getElementById("modalWeather");
-//Getting Weather Modal Btn
-var weatherBtn = document.getElementById("weatherBtn");
+var weatherbtn = L.easyButton('<i class="fas fa-cloud-sun"></i>', function(btn, map){
+  if ($('#countryselect').val() === null){
+    $('#alert').modal('show');
+  }else{
+  $("#modalWeather").modal('show');
+  }
+}).addTo(map);
+
+
 //Get Close Weather Modal
 var closeBtn = document.getElementById("closeBtnWeather");
 //Open Modal
@@ -191,4 +202,21 @@ window.onclick = function(event) {
       modalWeather.style.display = "none";
     }
 }
+
+// function for using the nav bar select
+$('#countrySelect').change(function(){
+ 
+  $('#countryBtn').click(function(){
+    $('#modalCountry').modal('show');
+  })
+  $('#weatherBtn').click(function(){
+    $('#modalWeather').modal('show');
+  })
+  
+  if (marker){
+    map.removeLayer(marker)
+  }
+  let val = $('#countrySelect').val()
+  
+})
 
