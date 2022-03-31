@@ -63,36 +63,38 @@
                     <button type="button" class="btn-close btn-close-white" id="closeBtnCountry" data-bs-modal="dismiss" aria-label="close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="container flex" id="countryInfoMain">
-                        <div class="row">
-                            <div class="col">Capital:</div>
-                            <div class="col" id="countryCapital"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col">Population:</div>
-                            <div class="col" id="countryPopulation"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col">Area in SqKm:</div>
-                            <div class="col" id="countryAreaInSqKm"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col">Continent:</div>
-                            <div class="col" id="countryContinent"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col">Languages:</div>
-                            <div class="col" id="countryLanguages"></div>
-                        </div>
-                        <!-- <div class="row">
-                            <div class="col">Currency:</div>
-                            <div class="col" id="countryCurrency"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col">Wikipedia:</div>
-                            <div class="col" id="countryWiki"></div>
-                        </div> -->
-                    </div>
+                    <table class="table ">
+                        <tr>
+                            <td>Capital</td>
+                            <td class='ti'><span class=countryCapital></span></td>
+                        </tr>
+                        <tr>
+                            <td>Population</td>
+                            <td class='ti'><span id=txtpopulation></span></td>
+                        </tr>
+                        <tr>
+                            <td>Continent</td>
+                            <td class='ti'><span class=countryContinent></span></td>
+                        </tr>
+                        <tr>
+                            <td>Area</td>
+                            <td class='ti'><span id=countryArea></span>km<sup>2</sup></td>
+                        </tr>
+                </table>
+                </br>
+                <span id="item"></span>
+                <table class="table">
+                    <th>
+                        Wikipedia
+                    </th>
+                    <tbody>
+                    <tr>
+                        <td class="wikitd"><iframe src='' style="width:100%; height: 500px;" id="link2" target=_blank ></iframe></td>
+                    </tr>
+                    </tbody>
+                    </table>
+                    
+                    </table>
                 </div>
             </div>
             </div>
