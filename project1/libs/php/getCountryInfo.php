@@ -22,10 +22,16 @@
 	$output['status']['name'] = "ok";
 	$output['status']['description'] = "success";
 	$output['status']['returnedIn'] = intval((microtime(true) - $executionStartTime) * 1000) . " ms";
-	$output['data'] = $decode['geonames'];
-	
+
+
+	$output['data']['country'] = $decode['geonames'][0]['countryName'];	
+	$output['data']['capital'] = $decode['geonames'][0]['countryCapital'];
+	$output['data']['population'] = number_format($decode['geonames'][0]['countryPopulation']);
+	$output['data']['area'] = number_format($decode['geonames'][0]['countryArea']);
+	$output['data']['continent'] = $decode['geonames'][0]['countryContinent'];
 	header('Content-Type: application/json; charset=UTF-8');
 
 	echo json_encode($output); 
 
 ?>
+
