@@ -94,9 +94,13 @@ $('#selectCountry').on('change', function() {
           // your error code
           console.log(textStatus, errorThrown);
         }
+
+        
     });
 
   });
+
+
 
       
 
@@ -109,6 +113,42 @@ $('#selectCountry').on('change', function() {
         $("#modalCountry").modal('show');
     }
   }).addTo(map);
+  
+  $.ajax({ 
+    url: "./libs/php/getCountryInfo.php",
+    type: "POST",
+    dataType: "JSON",
+    data: {
+      country: countryCode
+    },
+    success: function(result){  
+      
+      const capital = result.data.capital;
+      const country = result.data.country;
+      let countryWiki = country.split(" ").join("_")
+      const wiki = 'https://en.m.wikipedia.org/wiki/';
+      
+      const wikis =  wiki + countryWiki;
+      const population = result.data.population
+      const pop = population.replace(/,/g, '');
+      
+      let popForCities = Math.floor(pop / 400);
+
+
+      $('.countryName').html(result['data']['country'])
+      $('.countryCapital').html(result['data']['capital'])
+      $('.countryPopulation').html(result['data']['population'])
+      $('.countryArea').html(result["data"]["area"]);
+      $('.countryContinent').html(result['data']['continent'])
+      $('#link2').attr('src',wikis)
+
+
+      let alpha3 = result.data.iso_a3
+  
+      let alpha3lower = alpha3.toLowerCase()
+
+    }
+  })
 
 
 //Get Close Country Modal
@@ -127,53 +167,7 @@ window.onclick = function(event) {
       modalCountry.style.display = "none";
     }
   }
-//fetching info from restCountries
-  $('#btnRun').click(function() {
-    $.ajax({
-        url: "./php/restCountries.php",
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            country: $('#selectCountry').val()   
-        },
-        success: function(result) {
-          
-            console.log('restCountries', result);
-            if (result.status.name == "ok") {
-                currencyCode = result.currency.code;
-                capitalCityWeather= result.data.capital.toLowerCase();
-                iso2CountryCode = result.data.alpha2Code;
-                var countryName2 = result.data.name;
-                countryName = countryName2.replace(/\s+/g, '_');
-                
-               
-              //Geonames Country Info
-              $.ajax({
-                url: "libs/php/getCountryInfo.php",
-                type: 'GET',
-                dataType: 'json',
-                data: {
-                    geonamesInfo: iso2CountryCode,
-                },
-                success: function(result) {
-                    console.log('Geonames Data', result);
-                    if (result.status.name == "ok") {
-                      $('#countryCapital').html('Capital: <strong>'+result.data[0].capital+ '</strong><br>');
-                      $('#countryPopulation').html('Population: <strong>'+result.data[0].population+ '</strong><br>');
-                      $('#countryAreaInSqKm').html('Area: <strong>'+result.data[0].areaInSqKm+ '</strong> km²<br>');
-                      $('#countryContinent').html('Continent: <strong>'+result.data[0].continent+ '</strong><br>');
-                      $('#countryLanguages').html('Languages: <strong>'+ result.data[0].languages + '</strong><br>');
-                    }
-                  },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
-                }
-              })
 
-            }
-          }
-      });
-    });
   
 
 //Weather Modal
@@ -219,4 +213,3 @@ $('#countrySelect').change(function(){
   let val = $('#countrySelect').val()
   
 })
-
